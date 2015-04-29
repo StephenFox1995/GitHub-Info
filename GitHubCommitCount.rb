@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'nokogiri' 
 require 'open-uri'
-require 'daemons'
+require 'etc'
 
 
 # Returns formatted date string.
@@ -18,12 +18,19 @@ def getGitHubURLForUsername(username)
 end
 
 
-# Writes to a file
+# Retuns the current user's name who is logged into the local machine.
+def getCurrentUser 
+	return Etc.getlogin
+end
+
+
+# Writes to a file (writes to users desktop - OSX)
 def writeToFile(fileContent) 
-	filetoWrite = File.new("GitHubCommitCount.txt", "a")
+	filetoWrite = File.new("/Users/" + getCurrentUser + "/Desktop/GitHubCommitCount.txt", "a")
 	filetoWrite.puts(fileContent)
 	filetoWrite.close
 end
+
 
 
 
