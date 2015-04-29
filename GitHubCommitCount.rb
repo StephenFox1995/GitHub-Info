@@ -32,9 +32,8 @@ def writeToFile(fileContent)
 end
 
 
-
-
 githubURL = getGitHubURLForUsername("StephenFox1995")
+
 
 # Get the page source for that GitHub User.
 page = Nokogiri::HTML(open(githubURL))
@@ -55,6 +54,4 @@ commitCount =  page.css(cssElementToFind)[0]['data-count']
 
 todaysDateDDMMYY = getTodaysDate("%d-%m-%Y")
 
-
-
-writeToFile(todaysDateDDMMYY + " | " + commitCount)
+writeToFile(githubURL + "\n" + todaysDateDDMMYY + " | " + commitCount + "\n")
